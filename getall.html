@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getall</title>
+</head>
+<body>
+    
+    <input type="button" value="getall" id="getall">
+    <p id="res"> </p>
+    <script>
+        const getall = document.getElementById('getall');
+        const result = document.getElementById('res');
+
+        getall.addEventListener('click', () =>{
+            console.log("get clicked");
+        fetch('http://localhost:9000/api/books')
+             .then(res => {return res.json() })
+             .then(res => {result.innerText = JSON.stringify(res) });
+});
+</script>
+</body>
+</html>

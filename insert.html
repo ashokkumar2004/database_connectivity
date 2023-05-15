@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert</title>
+</head>
+<body>
+    <form>
+        Book id <input type="number" name="bid" id="bid"> <br><br>
+        Book name <input type="text" name="bname" id="bname"> <br><br>
+        Publisher name <input type="text" id="pname"> <br><br>
+        Category <input type="text" name="cate" id="cate"> <br> <br>
+        Price <input type="number" name="price" id="price"> <br><br>
+        <input type="button" name="insert" value="insert" id="insert"> <br><br>
+    </form>
+    <p id="res"></p>
+    
+</body>
+
+<script>
+    const bid = document.getElementById('bid');
+    const bname = document.getElementById('bname');
+    const pname = document.getElementById('pname');
+    const cate = document.getElementById('cate');
+    const price = document.getElementById('price');
+    const insert = document.getElementById('insert');
+    const result = document.getElementById('res')
+
+
+    insert.addEventListener('click',()=>{
+        var data = {
+            bid: parseInt(bid.value),
+            bname: bname.value,
+            pname: pname.value,
+            cate: cate.value,
+            price: parseInt(price.value),
+        }
+        fetch('http://localhost:9000/api/books',{
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json; chatset=UTF-8'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => {return res.json()})
+        .then(res => {result.innerText = JSON.stringify(res)});
+
+    })
+</script>
+</html>

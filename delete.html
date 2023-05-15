@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+    ID :
+    <input type="number" name="bid" id="bid">
+    <br>
+    <input type="button" value="delete" id="delete">
+    <p id="res"> </p>
+    </form>
+    <script>
+        const deleteone = document.getElementById('delete');
+        const bid = document.getElementById('bid');
+        const result = document.getElementById('res');
+
+        deleteone.addEventListener('click',()=>{
+            if(bid.value == ""){
+                result.innerText = "please enter bookid!!";
+            }
+            else{
+                fetch(`http://localhost:9000/api/books/${bid.value}`,{
+                    method: "DELETE"
+                })  
+                    .then((res) => {return res.text() })
+                    .then((res) => { result.innerText = res });
+            }
+
+        })
+    </script>
+
+</body>
+</html>

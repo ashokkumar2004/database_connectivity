@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Enter Book ID:
+    <input type="text" name="bid" id="bid">
+    <br>
+    <input type="button" value="getone" id="getone">
+    <p id="res"> </p>
+    <script>
+        const getone = document.getElementById('getone');
+        const rollno = document.getElementById('bid');
+        const result = document.getElementById('res');
+
+
+
+        console.log("get",getone)
+        getone.addEventListener('click',()=>{
+            if(bid.value == ""){
+                result.innerText = "please enter bookid!!";
+            }
+            else{
+                fetch(`http://localhost:9000/api/books/${bid.value}`)  
+                    .then(res => {return res.json() })
+                    .then(res => { result.innerText = JSON.stringify(res) });
+            }
+
+        })
+    </script>
+
+</body>
+</html>

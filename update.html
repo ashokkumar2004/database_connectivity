@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+</head>
+<body>
+    <form>
+        Bookid: <input type="number" name="bid" id="bid"><br>
+        Price of book: <input type="number" name="prce" id="price"><br>
+        <input type="button" value="update" id="update">
+        <p id="res"></p>
+    </form>
+    <script>
+        const update = document.getElementById('update');
+        const result = document.getElementById('res');
+        const bid = document.getElementById('bid');
+        const price = document.getElementById('price');
+
+        update.addEventListener('click', () => {
+            if (bid.value == "" || price.value == "") {
+                result.innerText = "Check book id and price";
+            }
+            else {
+                var data = {
+                    bid: parseInt(bid.value),
+                    price: parseInt(price.value)
+                };
+                fetch(`http://localhost:9000/api/books/${bid.value}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    },
+                    body:JSON.stringify(data),
+                  
+                })
+                    .then((res) => {return res.text()})
+                    .then((res) => { result.innerText = res });
+
+            }
+        });
+    </script>
+</body>
+</html>
